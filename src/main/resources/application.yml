@@ -1,0 +1,4 @@
+auth:
+    jwt:
+        secret: ${JWT_SECRET:board}
+        exp: ${JWT_EXP:3600}
