@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Optional;
 
 @Repository
 public class JpaUserRepository implements UserRepository {
@@ -14,8 +15,9 @@ public class JpaUserRepository implements UserRepository {
     private EntityManager entityManager;
 
     @Override
-    public User findById(String username) {
-        return entityManager.find(User.class, username);
+    public Optional<User> findById(String username) {
+        User user = entityManager.find(User.class, username);
+        return Optional.ofNullable(user);
     }
 
     @Override
