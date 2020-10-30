@@ -26,4 +26,8 @@ public class User {
 
     @Column
     private int age;
+
+    public boolean isCorrectPassword(String inputPassword) {
+        return password.equals(inputPassword);
+    }
 }
