@@ -4,18 +4,18 @@ import com.example.board.domain.user.dto.SignInRequest;
 import com.example.board.domain.user.dto.SignInResponse;
 import com.example.board.domain.user.dto.SignUpRequest;
 import com.example.board.domain.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RequiredArgsConstructor
 @RequestMapping("/users")
 @RestController
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping
     public void signUp(@RequestBody SignUpRequest signUpRequest) {

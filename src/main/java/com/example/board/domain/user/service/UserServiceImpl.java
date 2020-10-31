@@ -8,20 +8,18 @@ import com.example.board.domain.user.dto.SignInResponse;
 import com.example.board.domain.user.dto.SignUpRequest;
 import com.example.board.domain.user.exeptions.InvalidLoginInfoException;
 import com.example.board.domain.user.exeptions.UserAlreadyExistsException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private TokenProvider tokenProvider;
+    private final UserRepository userRepository;
+    private final TokenProvider tokenProvider;
 
     @Override
     @Transactional
