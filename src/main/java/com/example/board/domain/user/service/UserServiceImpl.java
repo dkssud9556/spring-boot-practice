@@ -24,11 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void signUp(SignUpRequest signUpRequest) {
-        Optional<User> user = userRepository.findById(signUpRequest.getUsername());
-
-        if (user.isPresent()) {
-            throw new UserAlreadyExistsException();
-        }
+        validateDuplicateUser(signUpRequest.getUsername());
 
         userRepository.save(
                 User.builder()
@@ -42,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public SignInResponse signIn(SignInRequest signInRequest) {
-        User user = userRepository.findById(signInRequest.getUsername())
+        User user = userRepository.findByUsername(signInRequest.getUsername())
                 .orElseThrow(InvalidLoginInfoException::new); // 로그인 실패
 
         if (!user.isCorrectPassword(signInRequest.getPassword())) {
@@ -51,5 +47,12 @@ public class UserServiceImpl implements UserService {
 
         String token = tokenProvider.generateToken(signInRequest.getUsername());
         return new SignInResponse(token);
+    }
+
+    private void validateDuplicateUser(String username) {
+        userRepository.findByUsername(username)
+                .ifPresent(user -> {
+                    throw new UserAlreadyExistsException();
+                });
     }
 }
