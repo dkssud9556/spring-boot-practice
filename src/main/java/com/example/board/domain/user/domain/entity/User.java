@@ -11,10 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Entity
 public class User {
+
+    protected User() {}
 
     @Id
     @Column(length = 20)

@@ -9,13 +9,12 @@ import javax.persistence.Embeddable;
 
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Embeddable
 public class PrivateInfo {
 
+    protected PrivateInfo() {}
+
     @Column(length = 10)
     private String name;
-
-    @Column
     private int age;
 }
