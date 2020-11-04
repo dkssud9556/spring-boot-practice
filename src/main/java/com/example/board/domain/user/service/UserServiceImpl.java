@@ -1,5 +1,6 @@
 package com.example.board.domain.user.service;
 
+import com.example.board.domain.user.domain.value.PrivateInfo;
 import com.example.board.domain.user.domain.TokenProvider;
 import com.example.board.domain.user.domain.entity.User;
 import com.example.board.domain.user.domain.repository.UserRepository;
@@ -11,8 +12,6 @@ import com.example.board.domain.user.exeptions.UserAlreadyExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -26,12 +25,16 @@ public class UserServiceImpl implements UserService {
     public void signUp(SignUpRequest signUpRequest) {
         validateDuplicateUser(signUpRequest.getUsername());
 
+        PrivateInfo privateInfo = PrivateInfo.builder()
+                .age(signUpRequest.getAge())
+                .name(signUpRequest.getName())
+                .build();
+
         userRepository.save(
                 User.builder()
                 .username(signUpRequest.getUsername())
                 .password(signUpRequest.getPassword())
-                .age(signUpRequest.getAge())
-                .name(signUpRequest.getName())
+                .privateInfo(privateInfo)
                 .build()
         );
     }
@@ -39,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public SignInResponse signIn(SignInRequest signInRequest) {
         User user = userRepository.findByUsername(signInRequest.getUsername())
-                .orElseThrow(InvalidLoginInfoException::new); // 로그인 실패
+                .orElseThrow(InvalidLoginInfoException::new);
 
         if (!user.isCorrectPassword(signInRequest.getPassword())) {
             throw new InvalidLoginInfoException();

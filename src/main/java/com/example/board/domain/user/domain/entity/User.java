@@ -1,10 +1,12 @@
 package com.example.board.domain.user.domain.entity;
 
+import com.example.board.domain.user.domain.value.PrivateInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -21,11 +23,8 @@ public class User {
     @Column(length = 30)
     private String password;
 
-    @Column(length = 10)
-    private String name;
-
-    @Column
-    private int age;
+    @Embedded
+    private PrivateInfo privateInfo;
 
     public boolean isCorrectPassword(String inputPassword) {
         return password.equals(inputPassword);
