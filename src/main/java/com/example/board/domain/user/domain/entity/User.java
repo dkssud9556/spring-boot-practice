@@ -3,16 +3,14 @@ package com.example.board.domain.user.domain.entity;
 import com.example.board.domain.user.domain.value.PrivateInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "user")
 public class User {
 
     protected User() {}
@@ -26,6 +24,11 @@ public class User {
 
     @Embedded
     private PrivateInfo privateInfo;
+
+    @ElementCollection
+    @CollectionTable(name = "board", joinColumns = @JoinColumn(name = "username"))
+    @Column(name = "board_id")
+    private List<Long> boardIds;
 
     public boolean isCorrectPassword(String inputPassword) {
         return password.equals(inputPassword);
