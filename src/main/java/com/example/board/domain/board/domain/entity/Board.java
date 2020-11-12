@@ -2,12 +2,14 @@ package com.example.board.domain.board.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Builder
 @Entity
 public class Board {
