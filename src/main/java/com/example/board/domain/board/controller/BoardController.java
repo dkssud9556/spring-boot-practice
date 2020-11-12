@@ -18,7 +18,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public List<Board> showBoards() {
+    public List<Board> showAllBoards() {
         return boardRepository.findAll();
     }
 
