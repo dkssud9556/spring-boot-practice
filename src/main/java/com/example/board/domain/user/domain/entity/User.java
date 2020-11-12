@@ -3,12 +3,14 @@ package com.example.board.domain.user.domain.entity;
 import com.example.board.domain.user.domain.value.PrivateInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @AllArgsConstructor
 @Builder
+@Getter
 @Entity
 @Table(name = "user")
 public class User {
