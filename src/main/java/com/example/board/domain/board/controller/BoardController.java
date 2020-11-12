@@ -2,11 +2,10 @@ package com.example.board.domain.board.controller;
 
 import com.example.board.domain.board.domain.entity.Board;
 import com.example.board.domain.board.domain.repository.BoardRepository;
+import com.example.board.domain.board.dto.PostBoardRequest;
+import com.example.board.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +15,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardRepository boardRepository;
+    private final BoardService boardService;
 
     @GetMapping
     public List<Board> showBoards() {
@@ -23,7 +23,7 @@ public class BoardController {
     }
 
     @PostMapping
-    public void postBoard() {
-
+    public void postBoard(@RequestBody PostBoardRequest postBoardRequest) {
+        boardService.postBoard(postBoardRequest);
     }
 }
