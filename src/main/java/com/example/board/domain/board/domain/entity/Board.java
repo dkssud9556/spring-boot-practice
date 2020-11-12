@@ -22,4 +22,7 @@ public class Board {
 
     @Column(length = 200)
     private String content;
+
+    @Column(length = 20)
+    private String username;
 }
