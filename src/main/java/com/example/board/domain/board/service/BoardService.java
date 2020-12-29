@@ -7,7 +7,9 @@ import com.example.board.domain.board.dto.PutBoardRequest;
 import java.util.List;
 
 public interface BoardService {
-    void postBoard(PostBoardRequest postBoardRequest);
-    List<GetBoardResponse> getAll();
+    void createBoard(PostBoardRequest postBoardRequest);
+    List<GetBoardResponse> viewAll();
+    GetBoardResponse viewBoardByBoardId(Long boardId);
     void modifyBoard(Long boardId, PutBoardRequest putBoardRequest);
+    void removeBoardByBoardId(Long boardId);
 }

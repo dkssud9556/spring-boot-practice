@@ -18,17 +18,27 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public List<GetBoardResponse> getAllBoards() {
-        return boardService.getAll();
+    public List<GetBoardResponse> viewAllBoards() {
+        return boardService.viewAll();
+    }
+
+    @GetMapping("/{boardId}")
+    public GetBoardResponse viewBoardByBoardId(@PathVariable("boardId") Long boardId) {
+        return boardService.viewBoardByBoardId(boardId);
     }
 
     @PostMapping
-    public void postBoard(@Valid @RequestBody PostBoardRequest postBoardRequest) {
-        boardService.postBoard(postBoardRequest);
+    public void createBoard(@Valid @RequestBody PostBoardRequest postBoardRequest) {
+        boardService.createBoard(postBoardRequest);
     }
 
     @PutMapping("/{boardId}")
-    public void putBoard(@PathVariable("boardId") Long boardId, @Valid @RequestBody PutBoardRequest putBoardRequest) {
+    public void modifyBoard(@PathVariable("boardId") Long boardId, @Valid @RequestBody PutBoardRequest putBoardRequest) {
         boardService.modifyBoard(boardId, putBoardRequest);
+    }
+
+    @DeleteMapping("/{boardId}")
+    public void removeBoard(@PathVariable("boardId") Long boardId) {
+        boardService.removeBoardByBoardId(boardId);
     }
 }
