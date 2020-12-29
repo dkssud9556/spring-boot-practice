@@ -8,6 +8,7 @@ import com.example.board.domain.board.dto.PutBoardRequest;
 import com.example.board.domain.board.exceptions.BoardNotFoundException;
 import com.example.board.domain.board.exceptions.UserNotMatchedException;
 import com.example.board.global.security.AuthenticationFacade;
+import com.example.board.global.util.ModelMapperUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class BoardServiceImpl implements BoardService {
     public List<GetBoardResponse> viewAll() {
         return boardRepository.findAll()
                 .stream()
-                .map(this::convertIntoGetBoardResponseDto)
+                .map(board -> ModelMapperUtils.getModelMapper().map(board, GetBoardResponse.class))
                 .collect(Collectors.toList());
     }
 
@@ -49,9 +50,10 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public GetBoardResponse viewBoardByBoardId(Long boardId) {
-        return convertIntoGetBoardResponseDto(
+        return ModelMapperUtils.getModelMapper().map(
                 boardRepository.findByBoardId(boardId)
-                    .orElseThrow(BoardNotFoundException::new)
+                        .orElseThrow(BoardNotFoundException::new),
+                GetBoardResponse.class
         );
     }
 
@@ -65,14 +67,5 @@ public class BoardServiceImpl implements BoardService {
         }
 
         boardRepository.delete(board);
-    }
-
-    private GetBoardResponse convertIntoGetBoardResponseDto(Board board) {
-        return GetBoardResponse.builder()
-                .boardId(board.getBoardId())
-                .title(board.getTitle())
-                .content(board.getContent())
-                .username(board.getUsername())
-                .build();
     }
 }
