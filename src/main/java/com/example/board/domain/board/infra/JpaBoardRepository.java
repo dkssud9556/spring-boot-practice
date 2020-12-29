@@ -18,4 +18,7 @@ public interface JpaBoardRepository extends JpaRepository<Board, Long>, BoardRep
 
     @Override
     Optional<Board> findByBoardId(Long boardId);
+
+    @Override
+    void delete(Board board);
 }

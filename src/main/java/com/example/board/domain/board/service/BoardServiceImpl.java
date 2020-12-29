@@ -6,6 +6,7 @@ import com.example.board.domain.board.dto.GetBoardResponse;
 import com.example.board.domain.board.dto.PostBoardRequest;
 import com.example.board.domain.board.dto.PutBoardRequest;
 import com.example.board.domain.board.exceptions.BoardNotFoundException;
+import com.example.board.domain.board.exceptions.UserNotMatchedException;
 import com.example.board.global.security.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,23 +22,18 @@ public class BoardServiceImpl implements BoardService {
     private final AuthenticationFacade authenticationFacade;
 
     @Override
-    public void postBoard(PostBoardRequest postBoardRequest) {
+    public void createBoard(PostBoardRequest postBoardRequest) {
         boardRepository.save(
                 postBoardRequest.toEntityWithUsername(authenticationFacade.getUsername())
         );
     }
 
     @Override
-    public List<GetBoardResponse> getAll() {
+    public List<GetBoardResponse> viewAll() {
         return boardRepository.findAll()
                 .stream()
-                .map(board -> GetBoardResponse.builder()
-                        .boardId(board.getBoardId())
-                        .title(board.getTitle())
-                        .content(board.getContent())
-                        .username(board.getUsername())
-                        .build()
-                ).collect(Collectors.toList());
+                .map(this::convertIntoGetBoardResponseDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -49,5 +45,34 @@ public class BoardServiceImpl implements BoardService {
         board.setContent(putBoardRequest.getContent());
 
         boardRepository.save(board);
+    }
+
+    @Override
+    public GetBoardResponse viewBoardByBoardId(Long boardId) {
+        return convertIntoGetBoardResponseDto(
+                boardRepository.findByBoardId(boardId)
+                    .orElseThrow(BoardNotFoundException::new)
+        );
+    }
+
+    @Override
+    public void removeBoardByBoardId(Long boardId) {
+        Board board = boardRepository.findByBoardId(boardId)
+                .orElseThrow(BoardNotFoundException::new);
+
+        if (!authenticationFacade.getUsername().equals(board.getUsername())) {
+            throw new UserNotMatchedException();
+        }
+
+        boardRepository.delete(board);
+    }
+
+    private GetBoardResponse convertIntoGetBoardResponseDto(Board board) {
+        return GetBoardResponse.builder()
+                .boardId(board.getBoardId())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .username(board.getUsername())
+                .build();
     }
 }
