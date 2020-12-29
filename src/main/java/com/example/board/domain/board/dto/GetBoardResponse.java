@@ -11,9 +11,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 public class GetBoardResponse {
+
     @JsonProperty("board_id")
     private Long boardId;
+
     private String title;
+
     private String content;
+
     private String username;
 }

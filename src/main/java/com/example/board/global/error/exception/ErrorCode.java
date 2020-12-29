@@ -8,7 +8,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
+
     BOARD_NOT_FOUND(404, "Board is not Found"),
+    USER_NOT_MATCHED(403, "Author and Remover not Matched"),
 
     BAD_REQUEST(400, "Bad Request(Invalid Parameter)"),
     USER_DUPLICATION(409, "User is Already Exists"),
