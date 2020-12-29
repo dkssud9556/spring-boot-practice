@@ -1,9 +1,6 @@
 package com.example.board.domain.board.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -27,4 +24,12 @@ public class Board {
 
     @Column(length = 20)
     private String username;
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
