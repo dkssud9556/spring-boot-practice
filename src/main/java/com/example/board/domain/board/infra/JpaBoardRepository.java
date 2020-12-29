@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface JpaBoardRepository extends JpaRepository<Board, Long>, BoardRepository {
@@ -14,4 +15,7 @@ public interface JpaBoardRepository extends JpaRepository<Board, Long>, BoardRep
 
     @Override
     Board save(Board board);
+
+    @Override
+    Optional<Board> findByBoardId(Long boardId);
 }
