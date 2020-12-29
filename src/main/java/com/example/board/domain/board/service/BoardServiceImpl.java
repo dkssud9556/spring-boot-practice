@@ -2,6 +2,7 @@ package com.example.board.domain.board.service;
 
 import com.example.board.domain.board.domain.entity.Board;
 import com.example.board.domain.board.domain.repository.BoardRepository;
+import com.example.board.domain.board.dto.GetBoardResponse;
 import com.example.board.domain.board.dto.PostBoardRequest;
 import com.example.board.domain.board.dto.PutBoardRequest;
 import com.example.board.domain.board.exceptions.BoardNotFoundException;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -26,8 +28,16 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<Board> getAll() {
-        return boardRepository.findAll();
+    public List<GetBoardResponse> getAll() {
+        return boardRepository.findAll()
+                .stream()
+                .map(board -> GetBoardResponse.builder()
+                        .boardId(board.getBoardId())
+                        .title(board.getTitle())
+                        .content(board.getContent())
+                        .username(board.getUsername())
+                        .build()
+                ).collect(Collectors.toList());
     }
 
     @Override

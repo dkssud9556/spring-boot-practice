@@ -1,6 +1,6 @@
 package com.example.board.domain.board.controller;
 
-import com.example.board.domain.board.domain.entity.Board;
+import com.example.board.domain.board.dto.GetBoardResponse;
 import com.example.board.domain.board.dto.PostBoardRequest;
 import com.example.board.domain.board.dto.PutBoardRequest;
 import com.example.board.domain.board.service.BoardService;
@@ -17,7 +17,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public List<Board> getAllBoards() {
+    public List<GetBoardResponse> getAllBoards() {
         return boardService.getAll();
     }
 
