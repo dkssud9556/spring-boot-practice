@@ -1,7 +1,6 @@
 package com.example.board.domain.board.controller;
 
 import com.example.board.domain.board.domain.entity.Board;
-import com.example.board.domain.board.domain.repository.BoardRepository;
 import com.example.board.domain.board.dto.PostBoardRequest;
 import com.example.board.domain.board.dto.PutBoardRequest;
 import com.example.board.domain.board.service.BoardService;

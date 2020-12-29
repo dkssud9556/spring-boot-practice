@@ -3,7 +3,6 @@ package com.example.board.global.security;
 import com.example.board.global.error.exception.BusinessException;
 import com.example.board.global.error.exception.ErrorCode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
 
