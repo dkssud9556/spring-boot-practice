@@ -7,6 +7,7 @@ import com.example.board.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,12 +23,12 @@ public class BoardController {
     }
 
     @PostMapping
-    public void postBoard(@RequestBody PostBoardRequest postBoardRequest) {
+    public void postBoard(@Valid @RequestBody PostBoardRequest postBoardRequest) {
         boardService.postBoard(postBoardRequest);
     }
 
     @PutMapping("/{boardId}")
-    public void putBoard(@PathVariable("boardId") Long boardId, @RequestBody PutBoardRequest putBoardRequest) {
+    public void putBoard(@PathVariable("boardId") Long boardId, @Valid @RequestBody PutBoardRequest putBoardRequest) {
         boardService.modifyBoard(boardId, putBoardRequest);
     }
 }
