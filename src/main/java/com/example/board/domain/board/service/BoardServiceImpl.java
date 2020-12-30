@@ -33,7 +33,7 @@ public class BoardServiceImpl implements BoardService {
     public List<GetBoardResponse> viewAll() {
         return boardRepository.findAll()
                 .stream()
-                .map(board -> ModelMapperUtils.getModelMapper().map(board, GetBoardResponse.class))
+                .map(board -> ModelMapperUtils.convertEntityIntoDTO(board, GetBoardResponse.class))
                 .collect(Collectors.toList());
     }
 
@@ -50,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public GetBoardResponse viewBoardByBoardId(Long boardId) {
-        return ModelMapperUtils.getModelMapper().map(
+        return ModelMapperUtils.convertEntityIntoDTO(
                 boardRepository.findByBoardId(boardId)
                         .orElseThrow(BoardNotFoundException::new),
                 GetBoardResponse.class
@@ -73,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
     public List<GetBoardResponse> viewMyBoards() {
         return boardRepository.findAllByUsername(authenticationFacade.getUsername())
                 .stream()
-                .map(board -> ModelMapperUtils.getModelMapper().map(board, GetBoardResponse.class))
+                .map(board -> ModelMapperUtils.convertEntityIntoDTO(board, GetBoardResponse.class))
                 .collect(Collectors.toList());
     }
 }
