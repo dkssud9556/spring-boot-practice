@@ -68,4 +68,12 @@ public class BoardServiceImpl implements BoardService {
 
         boardRepository.delete(board);
     }
+
+    @Override
+    public List<GetBoardResponse> viewMyBoards() {
+        return boardRepository.findAllByUsername(authenticationFacade.getUsername())
+                .stream()
+                .map(board -> ModelMapperUtils.getModelMapper().map(board, GetBoardResponse.class))
+                .collect(Collectors.toList());
+    }
 }

@@ -22,6 +22,11 @@ public class BoardController {
         return boardService.viewAll();
     }
 
+    @GetMapping("/me")
+    public List<GetBoardResponse> viewMyBoards() {
+        return boardService.viewMyBoards();
+    }
+
     @GetMapping("/{boardId}")
     public GetBoardResponse viewBoardByBoardId(@PathVariable("boardId") Long boardId) {
         return boardService.viewBoardByBoardId(boardId);

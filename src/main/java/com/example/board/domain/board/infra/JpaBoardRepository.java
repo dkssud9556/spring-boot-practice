@@ -21,4 +21,7 @@ public interface JpaBoardRepository extends JpaRepository<Board, Long>, BoardRep
 
     @Override
     void delete(Board board);
+
+    @Override
+    List<Board> findAllByUsername(String username);
 }

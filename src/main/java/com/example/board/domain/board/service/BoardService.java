@@ -9,6 +9,7 @@ import java.util.List;
 public interface BoardService {
     void createBoard(PostBoardRequest postBoardRequest);
     List<GetBoardResponse> viewAll();
+    List<GetBoardResponse> viewMyBoards();
     GetBoardResponse viewBoardByBoardId(Long boardId);
     void modifyBoard(Long boardId, PutBoardRequest putBoardRequest);
     void removeBoardByBoardId(Long boardId);

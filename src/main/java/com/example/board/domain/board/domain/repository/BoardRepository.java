@@ -9,5 +9,6 @@ public interface BoardRepository {
     List<Board> findAll();
     Board save(Board board);
     Optional<Board> findByBoardId(Long boardId);
+    List<Board> findAllByUsername(String username);
     void delete(Board board);
 }
