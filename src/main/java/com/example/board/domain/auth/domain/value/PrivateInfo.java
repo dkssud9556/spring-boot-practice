@@ -1,4 +1,4 @@
-package com.example.board.domain.user.domain.value;
+package com.example.board.domain.auth.domain.value;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

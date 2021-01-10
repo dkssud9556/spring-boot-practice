@@ -1,6 +1,6 @@
 package com.example.board.global.security;
 
-import com.example.board.domain.user.domain.repository.UserRepository;
+import com.example.board.domain.auth.domain.repository.UserRepository;
 import com.example.board.global.error.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

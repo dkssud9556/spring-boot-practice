@@ -1,13 +1,13 @@
-package com.example.board.domain.user.service;
+package com.example.board.domain.auth.service;
 
-import com.example.board.domain.user.domain.entity.User;
-import com.example.board.domain.user.domain.repository.UserRepository;
-import com.example.board.domain.user.domain.value.PrivateInfo;
-import com.example.board.domain.user.dto.SignInRequest;
-import com.example.board.domain.user.dto.SignInResponse;
-import com.example.board.domain.user.dto.SignUpRequest;
-import com.example.board.domain.user.exeptions.InvalidLoginInfoException;
-import com.example.board.domain.user.exeptions.UserAlreadyExistsException;
+import com.example.board.domain.auth.domain.entity.User;
+import com.example.board.domain.auth.domain.repository.UserRepository;
+import com.example.board.domain.auth.domain.value.PrivateInfo;
+import com.example.board.domain.auth.dto.SignInRequest;
+import com.example.board.domain.auth.dto.SignInResponse;
+import com.example.board.domain.auth.dto.SignUpRequest;
+import com.example.board.domain.auth.exeptions.InvalidLoginInfoException;
+import com.example.board.domain.auth.exeptions.UserAlreadyExistsException;
 import com.example.board.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserService {
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final JwtTokenProvider tokenProvider;

@@ -1,6 +1,6 @@
-package com.example.board.domain.user.domain.repository;
+package com.example.board.domain.auth.domain.repository;
 
-import com.example.board.domain.user.domain.entity.User;
+import com.example.board.domain.auth.domain.entity.User;
 
 import java.util.Optional;
 

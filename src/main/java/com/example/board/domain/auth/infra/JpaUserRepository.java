@@ -1,7 +1,7 @@
-package com.example.board.domain.user.infra;
+package com.example.board.domain.auth.infra;
 
-import com.example.board.domain.user.domain.entity.User;
-import com.example.board.domain.user.domain.repository.UserRepository;
+import com.example.board.domain.auth.domain.entity.User;
+import com.example.board.domain.auth.domain.repository.UserRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

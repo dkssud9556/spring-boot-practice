@@ -1,6 +1,6 @@
-package com.example.board.domain.user.domain.entity;
+package com.example.board.domain.auth.domain.entity;
 
-import com.example.board.domain.user.domain.value.PrivateInfo;
+import com.example.board.domain.auth.domain.value.PrivateInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
