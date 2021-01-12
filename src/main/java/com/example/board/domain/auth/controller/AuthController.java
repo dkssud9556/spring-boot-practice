@@ -17,15 +17,15 @@ import javax.validation.Valid;
 @RestController
 public class AuthController {
 
-    private final AuthService userService;
+    private final AuthService authService;
 
     @PostMapping
     public void signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
-        userService.signUp(signUpRequest);
+        authService.signUp(signUpRequest);
     }
 
     @PostMapping("/signin")
     public SignInResponse signIn(@Valid @RequestBody SignInRequest signInRequest) {
-        return userService.signIn(signInRequest);
+        return authService.signIn(signInRequest);
     }
 }
